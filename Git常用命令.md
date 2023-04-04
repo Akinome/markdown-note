@@ -1,4 +1,4 @@
-### Git常用命令
+# Git常用命令
 
 master和main的切换
 
@@ -15,7 +15,7 @@ Changes not staged for commit:
   (use "git restore <file>..." to discard changes in working directory)
 ```
 
-"git config" 命令 创建用户名配置 
+"git config" 命令 创建用户名配置
 
 ```PowerShell
 git config --global user,name <name>
@@ -39,7 +39,7 @@ git config --global init.defaultBranch <name>
 git status
 ```
 
-### Git工作流
+## Git工作流
 
 ![https://files.catbox.moe/wch2sk.png](https://files.catbox.moe/wch2sk.png)
 
@@ -103,4 +103,3 @@ git remote -v
 "git fetch"
 
 "git diff"
-

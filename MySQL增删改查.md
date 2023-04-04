@@ -1,6 +1,6 @@
-## MySQL增删改查
+# MySQL增删改查
 
-### 1. 创建查看 数据库、表
+## 1. 创建查看 数据库、表
 
 ```mysql
 create batabase *;
@@ -11,7 +11,7 @@ desc / describe *;
 
 ```
 
-### 2. 修改(table * 是表名,[] 属性可省略)
+## 2. 修改(table * 是表名,[] 属性可省略)
 
 ```mysql
 alter table * rename to *; # 修改表名
@@ -23,7 +23,7 @@ alter table * drop *; # 删除字段
 alter table * character set utf8mb4; # 修改字符集
 ```
 
-### 4. 录入信息
+## 4. 录入信息
 
 ```mysql
 insert into * () values();
@@ -34,7 +34,7 @@ values(101,"steven");
 select * from user; # 这里的*号是通配符
 ```
 
-### 5. 约束	
+## 5. 约束
 
 ```mysql
 # 非空约束
@@ -69,7 +69,7 @@ create table *
 );
 ```
 
-### 6.删库跑路
+## 6.删库跑路
 
 ```mysql
 drop table|database *; # 删表|删库
@@ -80,8 +80,6 @@ truncate table *; # 只清除表数据，保留表结构
 delete from * # delete可以删除一行，也可以删除多行；如果不加where条件是很危险的！不建议这样做
 
 ```
-
-
 
 ```mysql
 create table user
