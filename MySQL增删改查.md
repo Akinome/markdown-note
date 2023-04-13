@@ -138,8 +138,6 @@ constraint * foreign key(*)# 从表的字段
 );
 ```
 
-
-
 ```mysql
 # 插入数据，进行测试
 insert into class values(111,'张三'),(222,'李四'),(333,'王五');
@@ -154,10 +152,10 @@ insert into students values(1,111,'张三'),(2,222,'李四'),(3,333,'王五');
 
 ```mysql
 # 1.复制表结构
-#	复制表结构到新表，主键和自增方式是不会复制的
+#复制表结构到新表，主键和自增方式是不会复制的
 create table 新表 select * from 旧表;
 create table 新表 select * from 旧表 where false; #这个where条件将跳过数据的复制;
-# 	把旧表的所有字段类型都复制到新表
+# 把旧表的所有字段类型都复制到新表
 create table 新表 like 旧表;
 
 create table onlinedb.t1 like student.t1;
@@ -188,8 +186,6 @@ delete from 表名 order by id desc limit 5; # 倒序排序的前五条记录
 delete from 表名 order by id asc limit 5; # 正序排序的前五条记录
 
 ```
-
-
 
 ## 8.删库跑路
 
