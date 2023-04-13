@@ -109,7 +109,7 @@ ON UPDATE CASCADE : 主表修改记录时，从表关联记录的外键字段也
 
 ON DELETE CASCADE : 主表删除记录时，从表关联记录的外键字段也会删除。(将CASCADE改为RESTRICT，意思相反)
 
-#### 外键约束创建
+#### 1. 外键约束创建
 
 ```mysql
 # 主表
@@ -128,12 +128,74 @@ foreign key(uid) references class(xuehao) on update cascade on delete cascade)en
 ```
 
 ```mysql
+# 从表
+create table students(
+id int auto_increment primary key,
+uid int not null,
+name varchar(6) not null,
+constraint * foreign key(*)# 从表的字段
+    references class(xuehao)# 主表和字段
+);
+```
+
+
+
+```mysql
 # 插入数据，进行测试
 insert into class values(111,'张三'),(222,'李四'),(333,'王五');
 insert into students values(1,111,'张三'),(2,222,'李四'),(3,333,'王五');
 ```
 
-## 6.删库跑路
+```mysql
+
+```
+
+## 6.复制数据表
+
+```mysql
+# 1.复制表结构
+#	复制表结构到新表，主键和自增方式是不会复制的
+create table 新表 select * from 旧表;
+create table 新表 select * from 旧表 where false; #这个where条件将跳过数据的复制;
+# 	把旧表的所有字段类型都复制到新表
+create table 新表 like 旧表;
+
+create table onlinedb.t1 like student.t1;
+
+# 2.复制表结构及数据到新表
+create into 新表 select * from 旧表;
+
+# 3.复制旧表的数据到新表(新旧表结构一样)
+insert into 新表 select * 旧表;
+
+# 4.赋值旧表数据到新表(新旧表结构不一样)
+insert into 新表(字段1,字段2,..) select 字段1,字段2,... from 旧表;
+
+```
+
+## 7.删除表的数据
+
+```mysql
+delete from * # delete可以删除一行，也可以删除多行；如果不加where条件是很危险的！不建议这样做
+
+delete from 表名 where id=5; # 通过指定条件删除
+
+# 指定唯一键的范围删除
+delete from 表名 where id between 1 and 5; # 删除表中第一条到五条的记录
+
+# 排序后删除指定条件的数据
+delete from 表名 order by id desc limit 5; # 倒序排序的前五条记录
+delete from 表名 order by id asc limit 5; # 正序排序的前五条记录
+
+```
+
+
+
+## 8.删库跑路
+
+通过delete删除，优点：数据可恢复 缺点：速度慢
+
+通过truncate删除，优点：速度极快 缺点：数据不可恢复
 
 ```mysql
 drop table|database *; # 删表|删库
