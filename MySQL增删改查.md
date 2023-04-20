@@ -1,4 +1,4 @@
-# MySQL增删改查
+# MySQL 增删改查
 
 ## 1. 创建查看 数据库、表
 
@@ -12,6 +12,42 @@ desc / describe *;
 show variables like 'char%';
 
 ```
+
+### 1.1.自增数据表
+
+可以使主键自增，避免频繁的输入id主键
+
+```mysql
+# 只能在 int 类型中使用
+# 例子
+create table t3
+(
+    id int primary key auto_increment,# 自增主键
+    name varchar(10)
+);
+```
+
+### 数据类型
+
+#### 常用的数据类型有
+
+- 整型 int
+- 位类型 bit
+- 浮点型 float 和 double、real
+- 定点数 decimal、numeric
+- 日期时间类型 date、time、 datetime、year
+- 字符串 char、varchar、text
+- 二进制数据 Blob、xxbinary
+- 枚举 enum
+- 集合 set
+
+| 数据类型     | 字节 | 最小值(有符号/无符号)  | 最大值(有符号/无符号)                    |
+| ------------ | ---- | ---------------------- | ---------------------------------------- |
+| TINYINT      | 1    | -128/0                 | 127/255                                  |
+| SMALLINT     | 2    | -32768/0               | 32767/65535                              |
+| MEDIUMINT    | 3    | -8388608/0             | 8388607/1677215                          |
+| INT、INTEGER | 4    | -2147483648/0          | 2147483647/4294967295                    |
+| BIGINT       | 8    | -9223372036854775808/0 | 9223372036854775807/18446744073709551615 |
 
 ## 2. 修改(table * 是表名,[] 属性可省略)
 
@@ -32,8 +68,24 @@ insert into * () values();
 # 例子,user是表名，
 insert into user (uid,uname) 
 values(101,"steven");
-#查看表信息
+
+# 更新数据
+update * set name='' [where id=*]
+
+# 查看表信息
 select * from user; # 这里的*号是通配符
+```
+
+### 4.1. 更新数据
+
+```mysql
+update 表名 set name='更新的数据' [where id=*]
+# 有条件的更新指定一个字段数据
+update user set name='lily' where id=1;
+# 没有条件更新所以匹配字段的数据
+update user set name='lily'
+# 指定更新的区间
+update user set name='lily' where id between 1 and 5; # 更新表中第一条到五条的记录
 ```
 
 ## 5. 约束
@@ -54,6 +106,10 @@ create table *
 # UNIQUE唯一约束
 create table *
 (name varchar(10) unique
+);
+# UNSIGNED无符号约束
+create table *
+(name varchar(10) unsigned
 );
 # 默认
 create table *
@@ -215,5 +271,36 @@ create table user
     ucity varchar(50),
     uemail varchar(50),
     ucredit int default 0 not null
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+```
+
+```mysql
+create table goods
+(
+    id int primary key auto_increment,
+    type varchar(30) not null,
+    name varchar(30) unique,
+    price decimal(7,2) unsigned,
+    num int default 0,
+    add_time datetime
+)DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+insert into goods1(type,name,price,num,add_time)
+values('书籍','西游记',50.40,20,'2018-01-01 13:40:40'),
+('糖类','牛奶糖',7.50,200,'2018-02-02 13:40:40'),
+('糖类','水果糖',2.50,0,''),
+('服饰','休闲西服',800.00,'','2016-04-04 13:40:40'),
+('饮品','果汁',3.00,70,'2016-05-05 13:40:40'),
+('书籍','论语',109,50,'2016-06-06 13:40:40');
+
+create table zc
+(
+    id int primary key auto_increment,
+    name varchar(30) not null,
+    sex enum('w','m'),
+    hobby enum('basketball','football','bolleybal'),
+    score float(3,1) unique,
+    mobile varchar(11),
+    entry_time date
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
