@@ -3,7 +3,8 @@
 ## 1. 创建查看 数据库、表
 
 ```mysql
-create batabase *;
+create database *;
+create database * default character set=utf8;
 show databases;
 create table * ();
 show tables;
@@ -200,8 +201,18 @@ insert into class values(111,'张三'),(222,'李四'),(333,'王五');
 insert into students values(1,111,'张三'),(2,222,'李四'),(3,333,'王五');
 ```
 
-```mysql
+#### 2.添加外键约束
 
+```mysql
+# 添加外键约束
+alter table odersitem add constraint fk_odersitem_orders_cid foreign key(oid) references orders(oid);
+
+# 为users表中的ulogin添加唯一性（ulogin）约束
+alter table users add constraint uq_ulogin unique(ulogin);
+alter table users modify ulogin varchar(20) unique;
+
+# 添加default约束，默认值为当前系统时间
+alter table users modify uregtime datetime default current_timestamp;
 ```
 
 ## 6.复制数据表
