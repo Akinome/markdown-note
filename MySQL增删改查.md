@@ -62,6 +62,84 @@ alter table * drop *; # 删除字段
 alter table * character set utf8mb4; # 修改字符集
 ```
 
+## 3.查询信息
+
+```mysql
+select * from [table] #查询表中的所有信息
+select [字段名],[Field name] from [table] # 只查询字段所在列的信息
+select distinct [字段名] from [table] # 只查询字段所在列所包含的不同信息(相同数值的只显示一次)
+
+# 支持 where 条件
+select * from [table] where [Field name]=10;
+```
+
+### 3.1 模糊查询
+
+```mysql
+# % 代表一个或多个字符，_ 代表一个字符
+# 示例：查询名字里带'k'的用户的所有信息
+select * from [table] where [Field name] like '%k%';
+# 示例：查询名字里'k'结尾的用户的所有信息
+select * from [table] where [Field name] like '%k';
+# 示例：查询名字里第二个字符为'k'的用户的所有信息
+select * from [table] where [Field name] like '_k%';
+```
+
+### 3.2 排序查询
+
+```mysql
+# score 分数
+# 升序排序
+select * from [table] order by [Field name];
+select * from [table] order by [Field name] asc;
+# 降序排序
+select * from [table] order by [Field name] desc;
+```
+
+### 3.3 分页查询
+
+```mysql
+# 显示开头的三条数据
+select * from [table] limit 3;
+# 跳过前两条记录，查看第三条到第六条记录
+select * from [table] limit 2,4; # 2 跳过前两条记录，4 查询之后的四条记录
+select * from [table] limit 4 offset 2; # 另一种方法
+```
+
+### 3.4 分组查询
+
+| id   | name  | sex  | score | grade | teacher |
+| ---- | ----- | ---- | ----- | ----- | ------- |
+| 101  | lily  | 女   | 85    | 1     | 李老师  |
+| 102  | kate  | 女   | 92    | 1     | 张老师  |
+| 103  | mike  | 男   | 87    | 2     | 王老师  |
+| 104  | jack  | 男   | 88    | 2     | 李老师  |
+| 105  | lucky | 女   | 95    | 3     | 张老师  |
+| 106  | happy | 女   | 100   | 3     | 王老师  |
+| 107  | sunny | 男   | 90    | 4     | 李老师  |
+| 108  | alen  | 女   | 94    | 4     | 张老师  |
+
+```mysql
+# 查询每个老师，所带学生的数量
+select teacher,count(id) from t2 group by teacher;
+# 查询每个老师，所带学生的最高分
+select teacher,max(score) from t2 group by teacher;
+# 查询每个年级的平均分
+select grade,avg(score) from t2 group by grade;
+# 查询每个老师所带的学生数量，及姓名
+select teacher, count(id),group_concat(name) from t2 group by teacher;
+# 查询每个年级的学生数量及姓名
+select grade,count(id),group_concat(name) from t2 group by grade;
+# 查询男生女生的最高分
+select gender,max(score) from t2 group by gender;
+# 查询每为老师所带学生中，女同学的最高分
+select teacher,max(score) from t2 where sex='女' group by teacher;
+
+select count(tgender teacher) from t2;
+```
+
+
+
 ## 4. 录入信息
 
 ```mysql
@@ -315,3 +393,35 @@ create table zc
     entry_time date
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
+
+## 9. where 条件
+
+```mysql
+# 直接选择
+where [Filed name]=1;
+where [Filed name] in ('1','2');
+where [Filed name] not in ('1','2');
+
+select tgrade as '年级' from table where tgrade in (2,4,5);
+
+
+# 区间选择
+where [Filed name] between 1 and 10;
+
+# 或运算
+where [Filed name]=10 or [Filed name]=11; # or == &
+where [Filed name]=10 and [Filed name]=11; # and == &&
+
+```
+
+##  10. 聚合函数
+
+```mysql
+# 求和函数 返回字段的和
+select sum([Field name]) from [table];
+# 计数函数 返回选择中被选的函数
+select count([Field name]) from [table];
+# 聚合函数 进行分组查询
+select group_concat([Field name]) from [table]
+```
+
