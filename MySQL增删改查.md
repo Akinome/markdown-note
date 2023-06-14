@@ -104,6 +104,9 @@ select * from [table] limit 3;
 # 跳过前两条记录，查看第三条到第六条记录
 select * from [table] limit 2,4; # 2 跳过前两条记录，4 查询之后的四条记录
 select * from [table] limit 4 offset 2; # 另一种方法
+
+# 查询数值最高的三条信息
+select * from [table] order by [Field name] desc limit 3;
 ```
 
 ### 3.4 分组查询
@@ -138,6 +141,53 @@ select teacher,max(score) from t2 where sex='女' group by teacher;
 select count(tgender teacher) from t2;
 ```
 
+### 3.5 查询多表数据
+
+b表
+
+| id   | name | age  |
+| ---- | ---- | ---- |
+| 1    | kate | 18   |
+| 2    | jack | 19   |
+| 3    | lily | 17   |
+| 4    | tom  | 20   |
+
+c表
+
+| c_id | c_name | id   |
+| ---- | ------ | ---- |
+| 101  | php    | 1    |
+| 102  | mysql  | 2    |
+| 103  | web    | 3    |
+| 104  | php    | 2    |
+
+d表
+
+| d_id | c_id | id   | score |
+| ---- | ---- | ---- | ----- |
+| 201  | 101  | 1    | 95    |
+| 202  | 102  | 2    | 85    |
+| 203  | 103  | 3    | 96    |
+
+```mysql
+# 交叉连接。笛卡尔机错误示范，会匹配所有数据，数据量大时会卡机
+select name,c_id from b,c;
+
+select name,c_id from b cross join c;
+
+# 内连接查询，显示有效匹配数据
+# 查询以b表中的id,对应c表中的id匹配的专业数据
+select name,c_name from b inner join c where b.id=c.id;
+# 查询以c表中的id，对应c表中的id匹配的成绩数据
+select c_name,score from c inner join d on c.c_id=d.c_id;
+
+# 左外连接查询，显示有效匹配数据
+select * from b left join c on b.id=c.id;
+
+# 子查询,in 是一个运算符
+where [Field name] in (select gid from orders);
+```
+
 
 
 ## 4. 录入信息
@@ -149,7 +199,7 @@ insert into user (uid,uname)
 values(101,"steven");
 
 # 更新数据
-update * set name='' [where id=*]
+update [table] set name='' [where id=*]
 
 # 查看表信息
 select * from user; # 这里的*号是通配符
@@ -412,9 +462,17 @@ where [Filed name] between 1 and 10;
 where [Filed name]=10 or [Filed name]=11; # or == &
 where [Filed name]=10 and [Filed name]=11; # and == &&
 
+# 子查询
+where [Field name] in (select gid from orders);
+select * from goods where id in (select gid from orders);
+where add_time1 > '2020-01-01';
+select * from goods where id = any(select gid from orders where add_time1 > '2020-01-01')
+
 ```
 
-##  10. 聚合函数
+## 10. 聚合函数
+
+having 和 where 功能类似，但是一般不单独使用，而是和group by 一起使用。而且，having 后面可以直接使用聚合函数作为筛选条件，where 是不可以的。
 
 ```mysql
 # 求和函数 返回字段的和
@@ -423,5 +481,20 @@ select sum([Field name]) from [table];
 select count([Field name]) from [table];
 # 聚合函数 进行分组查询
 select group_concat([Field name]) from [table]
+
+# 最大值和最小值
+select max/min([Field name]) from [table];
+# having 查询每个类别的最高值大于10的类别
+select max([Field name]) from [table] group by [class] having max([Field name])>10;
+# 查询每个类别商品类目小于2的商品类别
+select max([Field name]) from [table] group by [class] having count([Field name])<2;
+
+# 时间函数 now()，查询年龄
+select year(now())-year(birthday) from [table]
 ```
 
+## 11. 
+
+
+
+# End Title
