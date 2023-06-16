@@ -188,8 +188,6 @@ select * from b left join c on b.id=c.id;
 where [Field name] in (select gid from orders);
 ```
 
-
-
 ## 4. 录入信息
 
 ```mysql
@@ -493,8 +491,4 @@ select max([Field name]) from [table] group by [class] having count([Field name]
 select year(now())-year(birthday) from [table]
 ```
 
-## 11. 
-
-
-
-# End Title
+## 11
