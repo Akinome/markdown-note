@@ -120,10 +120,10 @@ ssh-add ~/.ssh/id_rsa
 ```
 
 ## 3. 添加SSH密钥到GitHub
-可以通过网页添加，也可以通过命令行添加
+通过网页Github的个人设置里添加
 
 ```PowerShell
-cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_rsa.pub //  查看公钥
 ```
 
 ## 4. 添加远程仓库
@@ -134,5 +134,15 @@ git remote add origin git@github.com:username/repo.git
 git remote add [项目名] [SSH地址]
 ```
 
+# 更改SSH的端口号，避免特殊网络环境无法使用的问题如PAC代理等
+ssh默认端口号：22  
+测试使用命令： telnet github.com 22  
+在.ssh文件夹内新建一个config文件，并添加以下内容
 
-
+```PowerShell
+Host github.com
+  Hostname ssh.github.com  # 关键地址
+  Port 443                 # 使用HTTPS备用端口
+  User git  # 指定用户名 git GitHub 的 SSH 服务要求所有用户以 git 作为用户名连接
+  IdentityFile ~/.ssh/id_ed25519  # 指定密钥路径（可选）
+```
