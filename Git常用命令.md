@@ -97,9 +97,40 @@ git remote -v
 2021年起，GitHub不支持账号密码登录，要通过token登录
 
 ```PowerShell
+"git fetch" 命令 拉取远程仓库的更新
 
+"git diff" 查看远程仓库和本地仓库的差异
 ```
 
-"git fetch"
+# 以下是通过SSH方式连接远程仓库（新版本）
+## 1. 生成SSH密钥对
 
-"git diff"
+```PowerShell
+ssh-keygen -t rsa -C "your_email@example.com"
+//  简单命令，生成密钥对后，选择是否输入密钥，默认会保存在
+//   ~/.ssh/ 目录下
+ssh-keygen
+```
+
+## 2. 添加SSH密钥到ssh-agent（第一次默认配置好）
+
+```PowerShell
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+```
+
+## 3. 添加SSH密钥到GitHub
+可以通过网页添加，也可以通过命令行添加
+
+```PowerShell
+cat ~/.ssh/id_rsa.pub
+```
+
+## 4. 添加远程仓库
+
+```PowerShell
+git remote add origin git@github.com:username/repo.git
+```
+
+
+
