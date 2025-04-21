@@ -130,6 +130,8 @@ cat ~/.ssh/id_rsa.pub
 
 ```PowerShell
 git remote add origin git@github.com:username/repo.git
+// 直接使用
+git remote add [项目名] [SSH地址]
 ```
 
 
