@@ -90,6 +90,10 @@ git merge <branch name>
 git remote add <name> <URL>
 //  查看本地仓库和哪些远程仓库有联系
 git remote -v
+//  删除远程仓库
+git remote rm <name>
+//  修改远程仓库的地址
+git remote set-url <name> <URL>
 ```
 
 "git push" 命令 将本地仓库推送到远程仓库
