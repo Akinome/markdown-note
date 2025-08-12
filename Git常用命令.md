@@ -87,7 +87,7 @@ git status
 
 ## Git工作流
 
-![https://files.catbox.moe/wch2sk.png](https://files.catbox.moe/wch2sk.png)
+![https://files.catbox.moe/wch2sk.png](https://github.com/Akinome/markdown-note/blob/main/img/wch2sk.png?raw=true)
 
 "git add" 命令 将文件添加到暂存区并追踪(stage)
 
@@ -159,21 +159,22 @@ git remote set-url <name> <URL>
 ssh-keygen -t rsa -C "your_email@example.com"
 //  简单命令，生成密钥对后，选择是否输入密钥，默认会保存在
 //   ~/.ssh/ 目录下
-ssh-keygen
 ```
 
 ## 2. 添加SSH密钥到ssh-agent（第一次默认配置好）
 
 ```PowerShell
 eval "$(ssh-agent -s)"
+//  启动并启动 SSH 代理（ssh-agent）
 ssh-add ~/.ssh/id_rsa
+//  将指定的 SSH 私钥添加到已启动的 SSH 代理中
 ```
 
 ## 3. 添加SSH密钥到GitHub
 通过网页Github的个人设置里添加
 
 ```PowerShell
-cat ~/.ssh/id_rsa.pub //  查看公钥
+cat ~/.ssh/id_rsa.pub //  查看公钥内容
 ```
 
 ## 4. 添加远程仓库
