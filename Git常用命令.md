@@ -1,13 +1,59 @@
 # Git常用命令
 
-master和main的切换
+## master和main的切换
 
 ```PowerShell
 git config --global init.defaultBranch master|main
-git branch -M master|main
 ```
 
+#### 以上方法只是让以后创建的项目默认分支为main, 但对于已经创建的项目则无能为力, 所以我们还需要对已存在的项目逐个进行修改.
+
+> 配置文件一般在用户目录下的.gitconfig文件中, 可以使用文本编辑器打开进行修改, 也可以使用git命令进行修改上面也是使用git命令修改的
+
+## 修改已创建项目的主分支为main
+```PowerShell
+git branch -M main
+```
+
+#### 使用git branch -M main命令, 把当前master分支改名为main, 其中-M的意思是移动或者重命名当前分支
+
+## 修改远程仓库的主分支为main
+```PowerShell
+git push -u origin main
+```
+
+#### 使用git push -u origin main命令, 把本地的main分支推送到远程仓库origin上, 并建立追踪关系, 也就是把本地的main分支和远程的main分支关联起来
+
 [把git的默认分支master修改成main](https://zhuanlan.zhihu.com/p/455988463)
+
+## 删除远程仓库的master分支
+```PowerShell
+git push origin --delete master
+```
+
+#### 使用git push origin --delete master命令, 删除远程仓库origin上的master分支
+
+## 修改远程仓库的默认分支为main
+```PowerShell
+git push --delete origin master
+git push --set-upstream origin main
+```
+
+> 使用git push --delete origin master命令, 删除远程仓库origin上的master分支, 然后使用git push --set-upstream origin main命令, 把本地的main分支推送到远程仓库origin上, 并建立追踪关系, 也就是把本地的main分支和远程的main分支关联起来
+
+## Git常用命令
+
+"git clone" 命令 克隆远程仓库
+
+```PowerShell
+git clone <URL>
+```
+
+"git pull" 命令 拉取远程仓库的更新
+
+```PowerShell
+git pull
+```
 
 ```PowerShell
 Changes not staged for commit:
