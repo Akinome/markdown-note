@@ -80,11 +80,11 @@ git status 命令用于查看在你上次提交之后是否有对文件进行再
 
 git add . 表示把本地修改的文件都添加到本地git仓库管理列表,“"表示所有文件。
 
-git commit -m "add fiels”表示将刚才添加或修改的文件提交到本地仓库，“-m"表示后面的双引号内是注释，注释内容可
+git commit -m "add fiels”表示将刚才添加或修改的文件提交到本地仓库，“-m"表示后面的双引号内是注释，注释内容可以根据自己的需要填写。
 
-以根据自己的需要填写。
-
-git push origin master ,
+```
+git push origin master 
+```
 
 表示将本地的代码推送到github的远端仓库，origin表示当前目录绑定的远端仓库，master表示推
 
