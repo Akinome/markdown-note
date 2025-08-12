@@ -87,7 +87,7 @@ git status
 
 ## Git工作流
 
-![https://files.catbox.moe/wch2sk.png](https://gitee.com/akime/markdown-note/raw/main/img/wch2sk.png)
+![git工作流示意图](https://gitee.com/akime/markdown-note/raw/main/img/wch2sk.png)
 
 "git add" 命令 将文件添加到暂存区并追踪(stage)
 

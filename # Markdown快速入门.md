@@ -92,10 +92,15 @@ public class user{}
 
 ```c
 //在线图片/本地图片
-！[name](图片路径)
+![name](图片路径)
+// 本地图片推荐使用相对路径
+![本地图片](img/wch2sk.png)
 ```
 
-![我的照片](https://i0.hdslb.com/bfs/archive/669f29ce1f4d26a386a67351c17dc716149fc44b.jpg)
+ ![我的照片](https://i0.hdslb.com/bfs/archive/669f29ce1f4d26a386a67351c17dc716149fc44b.jpg)
+
+// 示例：引用仓库中的本地图片
+![仓库中的图片](img/wch2sk.png)
 
 ## 7.超链接
 
